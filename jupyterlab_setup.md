@@ -2,6 +2,9 @@
 
 Tutorial for getting setup on Google Compute Engine or a home machine. 
 
+* [Getting setup on the Google Compute Engine](#getting-setup-on-google-compute-engine)
+* [Getting setup at home](#getting-setup-at-home)
+
 ## Getting setup on Google Compute Engine
 
 1. Install the Google Cloud Software Developer’s Kit at [Cloud SDK](https://cloud.google.com/sdk). Please follow all the steps in the install tutorial. During the install, you should be able to set the default project to AgroServ because I will have added you as an editor to the AgroServ Google Cloud project. Don’t worry about setting a default region/zone, etc.
