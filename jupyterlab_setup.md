@@ -4,10 +4,10 @@ Tutorial for getting setup on Google Compute Engine or a home machine.
 
 ## Getting setup on Google Compute Engine
 
-1. Install the Google Cloud Software Developer’s Kit at [Cloud SDK](https://cloud.google.com/sdk), making sure to use the email address in Step 1. Please follow all the steps in the install tutorial. During the install, you should be able to set the default project to AgroServ because I will have added you as an editor to the AgroServ Google Cloud project. Don’t worry about setting a default region/zone, etc.
+1. Install the Google Cloud Software Developer’s Kit at [Cloud SDK](https://cloud.google.com/sdk). Please follow all the steps in the install tutorial. During the install, you should be able to set the default project to AgroServ because I will have added you as an editor to the AgroServ Google Cloud project. Don’t worry about setting a default region/zone, etc.
 
-2. Google Cloud Console. Create a VM with the following attributes: 
-  * Name it something like `agroserv-vm-yourGmailAddress`
+2. In Google Cloud Console, create a VM with the following attributes: 
+  * Name it something like `agroserv-vm-yourGmailUsername`
   * Set `region` to `us-west1`
   * For boot disk, choose Ubuntu 16 (Xenial), change drive size to 20GB
   * Check `Allow http traffic` and `Allow https traffic`
@@ -35,12 +35,12 @@ fi
 
   * Press `Create`
 
-3. Now give it some time. It will take a while to download and build the docker with Jupyter Lab. 
-4. Now, the connection step. It's easy. Your computer will listen on http://localhost:8888 for the Jupyter Lab docker. 
+3. Now give it some time (probably 10 or 15 minutes). It will take a while to download and build the docker with Jupyter Lab. 
+4. Now, the connection step. This will get your computer to listen on http://localhost:8888 for the Jupyter Lab docker. 
 ```
 gcloud beta compute ssh agroserv-vm-daviddralle -- -L 8888:localhost:8888
 ```
-5. You may be prompted for a password, which I have set to `agroserve`. Once Jupyter Lab is open, we will want to do some installing and authorizing for the tools we'll be using (Earth Engine, etc). Open a terminal in the Jupyter Lab launcher and run the following lines of code (run this code one or two lines at a time; you'll be following some printed links to authenticate at several points). 
+5. Navigate to [http://localhost:8888](http://localhost:8888) in a browser. You may be prompted for a password, which I have set to `agroserve`. Once Jupyter Lab is open, we will want to do some installing and authorizing for the tools we'll be using (Earth Engine, etc). Open a terminal in the Jupyter Lab launcher and run the following lines of code (run this code one or two lines at a time; you'll be following some printed links to authenticate at several points). 
 
 ```
 curl https://sdk.cloud.google.com | bash  
@@ -80,8 +80,8 @@ R -e 'IRkernel::installspec()'
 ```
 
 ## Getting setup at home
-1. make an `agroserve_project` folder somewhere on your computer. This will be the equivalent of the home directory on your virtual machine.  
-2. Open a terminal and `cd` into `agroserve_project`, then run `git clone https://github.com/daviddralle/agroserv`
+1. make an `agroserve_project` folder somewhere on your computer. This will be the equivalent of the home directory on virtual machine from the previous section.  
+2. Open a terminal on your machine and `cd` into `agroserve_project`, then run `git clone https://github.com/daviddralle/agroserv`. This will make a copy of the agroserv project notebook collection. 
 3. Make sure that you have [Docker](https://www.docker.com/get-docker) on your computer. 
 4. Get the docker machine for the agroserv project by running this command: `docker pull gcr.io/agroserve-202921/agroserv`. This will take quite a while because the docker is 7GB! So make sure you have the space on your machine. 
 5. For this step, make double triple sure you are in the `agroserve_project` folder! Do not run the below command in `agroserve_project/agroserv` folder. This is very important because the `agroserv` folder will be the git repository for all of our work. You do not want the Docker running in there, because we will endup saving sensitive account specific information for using Google Cloud API's that you probably don't want on GitHub. You can check that you're in the right folder with the command `echo $PWD`. Now, run: 
@@ -89,5 +89,7 @@ R -e 'IRkernel::installspec()'
 sudo docker run --privileged --rm -p 8888:8888 -v "$PWD":/home/jovyan gcr.io/agroserve-202921/agroserv
 ```
 
-6. Go to `http://localhost:8888` in a browser to open Jupyter Lab. You may need to input the default password, `agroserve`. 
+TODO: add more details about working with docker, making shortcut to the above command, etc
+
+6. Go to [http://localhost:8888](http://localhost:8888) in a browser to open Jupyter Lab. You may need to input the default password, `agroserve`. 
 7. To authenticate Google Cloud stuff, go through [step 5](#getting-setup-on-google-compute-engine) in the previous section. 
